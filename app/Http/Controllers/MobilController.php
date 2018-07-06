@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mobil;
-
 class MobilController extends Controller
 {
     /**
@@ -14,6 +13,7 @@ class MobilController extends Controller
      */
     public function index()
     {
+        //menampilkan semua data post melalui model 'post'
         $mobils = Mobil::all();
         return view('mobil.index',compact('mobils'));
     }
@@ -36,20 +36,18 @@ class MobilController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'nama' => 'required|max:255',
-            'model' => 'required|min:6',
-            'spesifikasi' => 'required|max:50',
-            'engine' => 'required|max:50',
-            'harga' => 'required'
+         $this->validate($request,[
+            'gambar' => 'required',
+            'nama' => 'required',
+            'merk_id' => 'required',
+            'deskripsi' => 'required'
         ]);
 
         $mobils = new Mobil;
+        $mobils->gambar = $request->gambar;
         $mobils->nama = $request->nama;
-        $mobils->model = $request->model;
-        $mobils->spesifikasi = $request->spesifikasil;
-        $mobils->engine = $request->engine;
-        $mobils->harga = $request->harga;
+        $mobils->merk_id = $request->merk_id;
+        $mobils->deskripsi = $request->deskripsi;
         $mobils->save();
         return redirect()->route('mobils.index');
     }
@@ -74,6 +72,7 @@ class MobilController extends Controller
      */
     public function edit($id)
     {
+        // memanggil data pos berdasrkan id di halaman pos edit
         $mobils = Mobil::findOrFail($id);
         return view('mobil.edit',compact('mobils'));
     }
@@ -87,23 +86,22 @@ class MobilController extends Controller
      */
     public function update(Request $request, $id)
     {
+         // unique dihapus karena ketika update data title tidak diubah juga tidak apa-apa
         $this->validate($request,[
-            'nama' => 'required|max:255',
-            'model' => 'required|min:6',
-            'spesifikasi' => 'required|max:50',
-            'engine' => 'required|max:50',
-            'harga' => 'required'
+            'gambar' => 'required',
+            'nama' => 'required',
+            'merk_id' => 'required',
+            'deskripsi' => 'required'
         ]);
 
+        // update data berdasarkan id
         $mobils = Mobil::findOrFail($id);
+        $mobils->gambar = $request->gambar;
         $mobils->nama = $request->nama;
-        $mobils->model = $request->model;
-        $mobils->spesifikasi = $request->spesifikasil;
-        $mobils->engine = $request->engine;
-        $mobils->harga = $request->harga;
+        $mobils->merk_id= $request->merk_id;
+        $mobils->deskripsi = $request->deskripsi;
         $mobils->save();
         return redirect()->route('mobils.index');
-
     }
 
     /**
@@ -114,9 +112,9 @@ class MobilController extends Controller
      */
     public function destroy($id)
     {
+        // delete data beradasarkan id
         $mobils = Mobil::findOrFail($id);
         $mobils->delete();
         return redirect()->route('mobils.index');  
     }
 }
-     

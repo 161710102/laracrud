@@ -19,8 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('mobils','MobilController');
-Route::resource('kategoris','KategoriController');
+Route::resource('beritas','BeritaController');
+Route::resource('jenis','JenisController');
+Route::resource('merks','MerkController');
+Route::resource('juals','JualController');
+

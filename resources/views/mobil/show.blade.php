@@ -1,39 +1,35 @@
+<br><br><br><br>
 @extends('layouts.admin')
 @section('content')
 <div class="row">
 	<div class="container">
 		<div class="col-md-12">
-			<div class="panel panel-primary">
-			  <div class="panel-heading">Show Data Mobil
-			  	<div class="panel-title pull-right"><a href="{{ route('mobils.index') }}">Kembali</a>
+			<div class="panel panel-primary"> 
+			  	<div class="panel-title pull-right"><a class="btn btn-outline-warning" href="{{ route('mobils.index') }}">
+					  <i class="fa fa-chevron-circle-left">&nbsp</i>Kembali</a>  
+					</div><div class="panel-heading"><h1>Data Merk</h1>
 			  	</div>
 			  </div>
+			  <br>
 			  <div class="panel-body">
-        			<div class="form-group">
-			  			<label class="control-label">Nama</label>	
-			  			<input type="text" name="nama" class="form-control" value="{{ $mobils->nama }}"  readonly>
+			  		<div class="form-group">
+			  			<label class="control-label">Gambar Mobil</label>
+						<input type="text" name="gambar" class="form-control" value="{{ $mobils->gambar }}"  readonly>
+						@if(isset($mobils)&& $mobils->gambar)
+						  <p>
+						  <img src="{{asset('img/'.$mobils->gambar)}}" width="500" height="500">
+						  </p>@endif
 			  		</div>
 
 			  		<div class="form-group">
-			  			<label class="control-label">Model</label>	
-			  			<input type="text" name="model" class="form-control" value="{{ $mobils->model }}"  
-			  			readonly>
-			  		</div>
-
-			  		<div class="form-group">
-			  			<label class="control-label">Spesifikasi</label>	
-			  			<input type="text" name="spesifikasi" class="form-control" value="{{ $mobils->spesifikasi }}"  readonly>
-			  		</div>
-
-			  		<div class="form-group">
-			  			<label class="control-label">Engine</label>	
-			  			<input type="text" name="engine" class="form-control" value="{{ $mobils->engine }}"  readonly>
-			  		</div>
-
-			  		<div class="form-group">
-			  			<label class="control-label">Harga</label>	
-			  			<input type="text" name="harga" class="form-control" value="{{ $mobils->harga }}"  readonly>
-			  		</div>
+			  			<label class="control-label">merk Mobil</label>	
+			  			<input type="text" name="merk_id" class="form-control" value="{{ $mobils->Merk->merk }}"  readonly>
+					  </div>
+					 
+					<div class="form-group">
+			  			<label class="control-label">Deskripsi</label>	
+			  			<textarea cols="40" rows="5" name="deskripsi" class="form-control" readonly>{{ $mobils->deskripsi }}</textarea>
+			  		</div>  
 			  	</div>
 			</div>	
 		</div>
